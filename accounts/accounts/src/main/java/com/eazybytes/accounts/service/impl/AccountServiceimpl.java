@@ -12,6 +12,7 @@ import com.eazybytes.accounts.mapper.CustomerMapper;
 import com.eazybytes.accounts.repository.AccountRepository;
 import com.eazybytes.accounts.repository.CustomerRepository;
 import com.eazybytes.accounts.service.IAccountService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -77,6 +78,8 @@ public class AccountServiceimpl implements IAccountService {
      * @param customerDto - CustomerDto Object
      * @return boolean indicating if the update of Account details is successful or not
      */
+
+
     @Override
     public boolean updateAccount(CustomerDto customerDto) {
         boolean isUpdated = false;
