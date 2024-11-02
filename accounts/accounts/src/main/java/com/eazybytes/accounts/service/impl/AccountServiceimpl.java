@@ -31,6 +31,7 @@ public class AccountServiceimpl implements IAccountService {
      * @param customerDto - CustomerDto Object
      */
     @Override
+    @Transactional
     public void createAccount(CustomerDto customerDto) {
         Customer customer = CustomerMapper.mapToCustomer(customerDto, new Customer());
         Optional<Customer> optionalCustomer = customerRepository.findByMobileNumber(customerDto.getMobileNumber());
@@ -46,6 +47,7 @@ public class AccountServiceimpl implements IAccountService {
      * @param customer - Customer Object
      * @return the new account details
      */
+
     private Accounts createNewAccount(Customer customer) {
         Accounts newAccount = new Accounts();
         newAccount.setCustomerId(customer.getCustomerId());
@@ -81,6 +83,7 @@ public class AccountServiceimpl implements IAccountService {
 
 
     @Override
+    @Transactional
     public boolean updateAccount(CustomerDto customerDto) {
         boolean isUpdated = false;
         AccountsDto accountsDto = customerDto.getAccountsDto();
@@ -107,6 +110,7 @@ public class AccountServiceimpl implements IAccountService {
      * @return boolean indicating if the delete of Account details is successful or not
      */
     @Override
+    @Transactional
     public boolean deleteAccount(String mobileNumber) {
         Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
                 () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
